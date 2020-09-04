@@ -51,7 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'login';
 $route['/(any:)'] = 'Dashboard_lembaga/any:';
-$route['/(any:)'] = 'Dashboard_admin/any:';
+$route['/(any:)'] = 'Dashboard/any:';
+$route['/(any:)'] = 'profil/any:';
+
+$route['/(any:)'] = 'Chain/any:';
 //$route['/(any:)'] = 'Welcome/any:';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

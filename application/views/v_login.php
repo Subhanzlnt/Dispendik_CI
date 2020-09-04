@@ -25,33 +25,28 @@
                                             </ul>
                                             <div class="tab-content mt-3" id="myTabContent">
                                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                                    <form id="form1" name="form1" method="post" action="<?php echo site_url('chain/aksi_form') ?>">
-                                                        
-
+                                                    <form id="form1" name="form1" method="post" action="<?php echo site_url('login/auth_lembaga') ?>">
+                                                    <?php  $this->session->set_flashdata('msg','Username or Password is Wrong');?>
                                                         <div class="col-sm-13 form-group">
                                                             <label for="select_kec" class="small">Kecamatan</label>
-                                                            <select id="kecamatan" name="kecamatan" class="form-control" >
+                                                            <select id="kecamatan" name="kecamatan" class="form-control form-control-sm" >
                                                                 <option value="0">Pilih</option>
-
                                                                     <?php foreach($data->result() as $row_kecamatan) {?>
                                                                     <option value="<?php echo $row_kecamatan->ID?>"> 
                                                                     <?php echo $row_kecamatan->nama_kec ?>
                                                                      </option>
                                                                     <?php } ?>
                                                             </select>
-                                                            
-                                                            
-                                                                
                                                         </div>
                                                         <div class="col-sm-13 form-group">
                                                             <label for="select_lembaga" class="small">Nama Lembaga</label>
-                                                            <select name="lembaga" class="lembaga form-control form-control-sm js-example-basic-single" name="state select_lembaga">
-                                                                <option value="0">Pilih</option>                   
+                                                            <select id="select_lembaga" class="lembaga form-control form-control-sm js-example-basic-single" name="lembaga">
+                                                                <option value="0">Pilih</option>             
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="inputPassword">Kata Sandi</label>
-                                                            <input class="form-control" id="inputPassword" type="password" placeholder="Masukkan Kata Sandi" /></div>
+                                                            <input class="form-control" id="inputPassword" type="password" placeholder="Masukkan Kata Sandi" name="password"/></div>
                                                         <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                             <a class="small" href="password.php">Lupa Kata Sandi?</a>
                                                             <input class="btn btn-primary" type="submit" value="Login"></td>
@@ -60,7 +55,7 @@
                                                     </form>
                                                 </div>
                                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                                    <form action="" method="POST">
+                                                    <form action="<?php echo site_url('login/auth_admin') ?>" method="POST">
                                                         <div class="form-group">
                                                             <label class="small mb-1" for="inputEmailAddress">Nama Pengguna</label>
                                                             <input class="form-control py-4"  type="text" placeholder="Masukkan Nama Pengguna" name="username"/>
@@ -101,11 +96,13 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.chained.min.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+                
                 $('#kecamatan').change(function(){
+                    $('.js-example-basic-single').select2();
                     var id=$(this).val();
                     $.ajax({
                         url : "<?php echo base_url();?>index.php/login/get_lembaga",
-                        method : "POST",
+                        method : "post",
                         data : {id: id},
                         async : false,
                         dataType : 'json',
@@ -113,15 +110,17 @@
                             var html = '';
                             var i;
                             for(i=0; i<data.length; i++){
-                                html += '<option>'+data[i].nama_lembaga+'</option>';
+                                html += '<option value="' +data[i].nama_lembaga +'" >'+data[i].nama_lembaga+'</option>';
                             }
                             $('.lembaga').html(html);
+
                         }
                     });
+                    
                 });
             });
         </script> 
-        <link href="<?php echo base_url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css') ?>" rel="stylesheet" />
-        <script src="<?php echo base_url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') ?>"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     </body>
 </html>

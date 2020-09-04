@@ -1,9 +1,6 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * 
- */
 class Login_model extends CI_Model
 {
 	function __construct()
@@ -20,13 +17,6 @@ class Login_model extends CI_Model
 
 	public function get_lembaga($id)
 	{
-		//$get_kec = $this->get_kec();
-		//return $get_kec;
-		//$this->db->order_by('nama_lembaga', 'asc');
-		//$this->db->get('login_'.'$get_kec');
-		//$this->db->order_by('nama_lembaga','asc');
-		//$this->db->join('lembaga', 'lembaga.kode_kec = kecamatan.kode_kec');
-		//return $this->db->get('kecamatan')->result();
 		$tampil_lembaga=$this->db->query("SELECT * FROM lembaga WHERE ID_kec='$id'");
 		return $tampil_lembaga->result();
 
@@ -38,5 +28,21 @@ class Login_model extends CI_Model
 		$this->db->join('kecamatan', 'lembaga.kode_kec = kecamatan.kode_kec');
 		return $this->db->get('lembaga')->row();
 	}
+	
+	function validate($username,$password){
+		$this->db->where('username',$username);
+		$this->db->where('password',$password);
+		$result = $this->db->get('login_admin',1);
+		return $result;
+	}
+
+	function validate_lembaga($lembaga,$password){
+		//	$this->db->where('nama_kec',$nama_kec);
+		$this->db->where('nama_lembaga',$lembaga);
+		$this->db->where('password',$password);
+		$result = $this->db->get('lembaga',1);
+		return $result;
+	  }
+
 }
  ?>

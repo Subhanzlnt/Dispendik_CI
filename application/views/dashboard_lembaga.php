@@ -64,7 +64,7 @@ if(isset($_SESSION['username'])== 0) { //Halaman ini tidak dapat diakses jika be
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>Aset</span></a>
                             </li>
                             <li>
-                                <a href="pengajuan.php" aria-expanded="true"><i class="ti-clipboard"></i><span>Pengajuan</span></a>
+                                <a href="pengajuan.php  " aria-expanded="true"><i class="ti-clipboard"></i><span>Pengajuan</span></a>
                             </li>
                             <li>
                                 <a href="starter.php" aria-expanded="true"><i class="ti-user"></i><span>Profile</span></a>

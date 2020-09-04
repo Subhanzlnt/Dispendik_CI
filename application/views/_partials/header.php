@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+
             <div class="header-area">
                 <div class="row align-items-center">
                     <!-- nav and search button -->
@@ -16,3 +20,6 @@
                     </div>
                 </div>
             </div>
+
+</body>
+</html>
